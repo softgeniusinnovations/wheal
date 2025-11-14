@@ -1,0 +1,498 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.page {
+  position: relative;
+  background-image: url(img/bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  padding: 40px;
+  z-index: 5;
+}
+
+/* Left side - Content */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* Right side - Wheel */
+.wheel {
+  position: relative;
+  align-self: center;
+  justify-self: center;
+  max-width: 600px;
+}
+
+.wheel__inside {
+  overflow: hidden;
+}
+
+.wheel__part {
+  pointer-events: none;
+  user-select: none;
+}
+
+.wheel__outer {
+  position: relative;
+  z-index: 2;
+}
+
+.wheel__inner {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  z-index: 1;
+  width: 90%;
+}
+
+.logo {
+  max-width: 500px;
+  width: 100%;
+  animation: scaling 4s ease-in-out infinite;
+}
+
+@keyframes scaling {
+  0%, 100% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.05;
+  }
+}
+
+.title {
+  font-family: Inter, sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  font-style: italic;
+  color: white;
+  -webkit-text-stroke: 2px #264265;
+  text-shadow: 0px 4px 15px #264265;
+  paint-order: stroke fill;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Simplified Button */
+.button {
+  width: 100%;
+  max-width: 350px;
+  padding: 20px 40px;
+  font-size: 28px;
+  font-weight: 700;
+  font-family: Inter, sans-serif;
+  color: white;
+  background: linear-gradient(135deg, #d946ef 0%, #f472b6 50%, #d946ef 100%);
+  border: 4px solid #a21caf;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 2px 5px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 25px rgba(0, 0, 0, 0.4),
+    inset 0 2px 5px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #e879f9 0%, #f9a8d4 50%, #e879f9 100%);
+}
+
+.button:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 
+    0 5px 15px rgba(0, 0, 0, 0.3),
+    inset 0 2px 5px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.button__icon img{
+  width: 50px;
+}
+
+.button__icon {
+  font-size: 32px;
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.button__text {
+  font-style: italic;
+}
+
+.decoration {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+}
+
+.decorations__top {
+  top: -20%;
+  right: 0;
+  width: 40%;
+  animation: topdown 3s ease-in-out infinite;
+}
+
+@keyframes topdown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20%);
+  }
+}
+
+.decorations-wrapper {
+  z-index: 1;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50%;
+  width: 100%;
+}
+
+.decorations__bottom {
+  position: absolute;
+  bottom: 0;
+  max-width: 1440px;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: downtop 3s ease-in-out infinite;
+}
+
+@keyframes downtop {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(20%);
+  }
+}
+
+/* Popup Styles */
+.popup {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 10;
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 589px;
+  background-color: #ffffff;
+  border: #d946ef solid 25px;
+  border-radius: 127px;
+  box-shadow: inset 0px 0px 20px 20px rgba(0, 0, 0, 0.25);
+  padding: 28px 30px;
+  font-family: Inter, sans-serif;
+  transition: all 0.2s ease-in-out;
+}
+
+.popup__icon {
+  width: 100px;
+  margin: 0 auto;
+}
+
+.popup__code {
+  color: #1c4367c2;
+  position: relative;
+  margin: 24px 0 30px 0;
+  padding: 10px 58px 10px 24px;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 58px;
+  font-style: italic;
+  border: 2px dashed #000000;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.popup__code::before {
+  position: absolute;
+  text-align: center;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 19px;
+  line-height: 1.2;
+  content: "Enter during registration";
+  font-size: 14px;
+  font-weight: 400;
+  cursor: default;
+}
+
+.popup__code::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 24px;
+  width: 24px;
+  height: 24px;
+  background-image: url(img/copyIcon.svg);
+  content: "";
+  font-size: 16px;
+}
+
+.popup__code:hover {
+  opacity: 0.85;
+}
+
+.popup__link {
+  display: block;
+  width: 75%;
+  text-decoration: none;
+}
+
+/* Simplified Popup Button */
+.popup-button {
+  width: 100%;
+  padding: 18px 30px;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: Inter, sans-serif;
+  color: white;
+  background: linear-gradient(135deg, #d946ef 0%, #f472b6 50%, #d946ef 100%);
+  border: 3px solid #a21caf;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 
+    0 6px 15px rgba(0, 0, 0, 0.3),
+    inset 0 2px 5px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.popup-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.4),
+    inset 0 2px 5px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #e879f9 0%, #f9a8d4 50%, #e879f9 100%);
+}
+
+.popup-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.popup-button__text {
+  font-style: italic;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.msg {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(0%) translateX(-50%);
+  font-size: 10px;
+  top: 50%;
+  left: 50%;
+  transition: all 0.5s ease-in-out;
+}
+
+/* Tablet Styles */
+@media screen and (max-width: 996px) {
+  .wrapper {
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 38px;
+  }
+
+  .button {
+    font-size: 24px;
+    padding: 18px 35px;
+  }
+
+  .button__icon {
+    font-size: 28px;
+  }
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  .page {
+    background-image: url(img/bg-mobi.png);
+  }
+
+  .wrapper {
+    grid-template-columns: 1fr;
+    padding: 20px 10px;
+    gap: 20px;
+  }
+
+  .content {
+    display: contents;
+  }
+
+  .logo {
+    order: 1;
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .title {
+    order: 2;
+    font-size: 32px;
+  }
+
+  .wheel {
+    order: 3;
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .button {
+    order: 4;
+    width: 85%;
+    font-size: 22px;
+    margin: 0 auto;
+  }
+
+  .decorations__top {
+    width: 80%;
+    top: 5%;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @keyframes topdown {
+    0%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(-15%);
+    }
+  }
+
+  .popup {
+    max-width: 95%;
+    padding: 20px 40px;
+    border: #d946ef solid 15px;
+  }
+
+  .popup__code {
+    font-size: 32px;
+    margin: 17px 0 30px 0;
+  }
+
+  .popup__link {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .button {
+    font-size: 20px;
+    padding: 16px 30px;
+  }
+
+  .button__icon {
+    font-size: 24px;
+  }
+
+  .popup {
+    border-radius: 50px;
+    padding: 20px 20px;
+  }
+
+  .popup__code {
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  .popup__code::before {
+    font-size: 12px;
+  }
+
+  .popup-button {
+    font-size: 20px;
+    padding: 15px 25px;
+  }
+}
+
+@media screen and (max-width: 356px) {
+  .button {
+    width: 95%;
+  }
+
+  .popup {
+    padding: 10px 10px;
+    border: #d946ef solid 10px;
+  }
+
+  .popup-button {
+    font-size: 18px;
+  }
+}
